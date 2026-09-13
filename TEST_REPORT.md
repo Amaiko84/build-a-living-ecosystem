@@ -306,3 +306,20 @@ The final regression confirmed:
 - keyboard navigation reaches interactive controls;
 - deterministic model tests remain fully passing.
 
+
+## Public deployment verification
+
+Public HTTPS preview:
+
+https://amaiko84.github.io/build-a-living-ecosystem/
+
+Verification result:
+
+- GitHub Pages status: built
+- HTTPS enforced: yes
+- page HTTP response: 200
+- styles.css HTTP response: 200
+- app.js HTTP response: 200
+- ecosystem-model.js HTTP response: 200
+- expected page title present
+

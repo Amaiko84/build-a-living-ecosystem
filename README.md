@@ -20,6 +20,10 @@ Learners can:
 2. Predict and experiment with sunlight and water.
 3. Restore balance to a struggling ecosystem.
 
+## Public preview
+
+https://amaiko84.github.io/build-a-living-ecosystem/
+
 ## Run locally
 
 No build step is required.
