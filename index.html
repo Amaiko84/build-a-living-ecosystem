@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Meadow Balance Lab</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' font-size='48'%3E🌱%3C/text%3E%3C/svg%3E">
+  <meta name="description" content="Interactive ecosystem lesson for age 9">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to lesson</a>
+
+  <header class="site-header">
+    <div>
+      <p class="eyebrow">Meadow Balance Lab</p>
+      <h1>Build a Living Ecosystem</h1>
+      <p class="intro">
+        Explore how plants, animals, sunlight and water are connected
+        in a simplified meadow model.
+      </p>
+    </div>
+
+    <button id="resetAllBtn" class="secondary-btn" type="button">
+      Reset lesson
+    </button>
+  </header>
+
+  <main id="main">
+    <section class="panel onboarding">
+      <h2>Your mission</h2>
+      <p>
+        Complete three challenges: build a habitat, make predictions,
+        and repair a struggling ecosystem.
+      </p>
+
+      <div class="learning-grid">
+        <article>
+          <h3>Producer</h3>
+          <p>A plant that uses sunlight and water to grow.</p>
+        </article>
+
+        <article>
+          <h3>Consumer</h3>
+          <p>
+            An animal that gets energy by eating plants or other animals.
+          </p>
+        </article>
+
+        <article>
+          <h3>Model values</h3>
+          <p>
+            Numbers from 0 to 100 used only inside this simplified model.
+            They are not real scientific measurements.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <nav class="activity-nav" aria-label="Lesson activities">
+      <button type="button" class="nav-btn active" data-target="build">
+        1. Build
+      </button>
+      <button type="button" class="nav-btn" data-target="predict">
+        2. Predict
+      </button>
+      <button type="button" class="nav-btn" data-target="restore">
+        3. Restore
+      </button>
+    </nav>
+
+    <section id="build" class="activity panel">
+      <div class="activity-heading">
+        <div>
+          <p class="step-label">Activity 1</p>
+          <h2>Build a healthy meadow</h2>
+        </div>
+        <span id="buildStatus" class="status-badge">Not complete</span>
+      </div>
+
+      <p>
+        Choose at least two producers, two herbivores and one predator.
+      </p>
+
+      <div class="species-grid" id="speciesGrid">
+        <label class="species-card">
+          <input type="checkbox" value="grass">
+          <span aria-hidden="true">🌿</span>
+          <strong>Meadow grass</strong>
+          <small>Producer</small>
+        </label>
+
+        <label class="species-card">
+          <input type="checkbox" value="wildflowers">
+          <span aria-hidden="true">🌼</span>
+          <strong>Wildflowers</strong>
+          <small>Producer</small>
+        </label>
+
+        <label class="species-card">
+          <input type="checkbox" value="rabbit">
+          <span aria-hidden="true">🐇</span>
+          <strong>Rabbit</strong>
+          <small>Herbivore</small>
+        </label>
+
+        <label class="species-card">
+          <input type="checkbox" value="grasshopper">
+          <span aria-hidden="true">🦗</span>
+          <strong>Grasshopper</strong>
+          <small>Herbivore</small>
+        </label>
+
+        <label class="species-card">
+          <input type="checkbox" value="fox">
+          <span aria-hidden="true">🦊</span>
+          <strong>Fox</strong>
+          <small>Predator</small>
+        </label>
+      </div>
+
+      <div class="button-row">
+        <button id="checkHabitatBtn" type="button">Check my habitat</button>
+        <button id="buildHintBtn" type="button" class="secondary-btn">
+          Give me a hint
+        </button>
+      </div>
+
+      <div id="buildFeedback" class="feedback" aria-live="polite">
+        Choose organisms, then check your habitat.
+      </div>
+
+      <div class="relationship-box">
+        <h3>Energy flow</h3>
+        <p>Arrows mean energy moves from food to the consumer.</p>
+        <ul>
+          <li>Grass → Rabbit</li>
+          <li>Wildflowers → Rabbit</li>
+          <li>Grass → Grasshopper</li>
+          <li>Wildflowers → Grasshopper</li>
+          <li>Rabbit → Fox</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="predict" class="activity panel hidden">
+      <div class="activity-heading">
+        <div>
+          <p class="step-label">Activity 2</p>
+          <h2>Predict and experiment</h2>
+        </div>
+        <span id="predictStatus" class="status-badge">Not complete</span>
+      </div>
+
+      <label for="scenarioSelect"><strong>Starting scenario</strong></label>
+      <select id="scenarioSelect">
+        <option value="healthy">Healthy meadow</option>
+        <option value="drought">Dry spell</option>
+        <option value="cloudy">Cloudy week</option>
+      </select>
+
+      <div class="control-grid">
+        <label>
+          Water
+          <input id="waterControl" type="range" min="0" max="100" value="70">
+          <span id="waterValue">70</span>
+        </label>
+
+        <label>
+          Sunlight
+          <input id="sunControl" type="range" min="0" max="100" value="70">
+          <span id="sunValue">70</span>
+        </label>
+      </div>
+
+      <fieldset>
+        <legend>What do you predict will happen to the plants?</legend>
+
+        <label>
+          <input type="radio" name="prediction" value="increase">
+          They will increase
+        </label>
+
+        <label>
+          <input type="radio" name="prediction" value="decrease">
+          They will decrease
+        </label>
+
+        <label>
+          <input type="radio" name="prediction" value="stable">
+          They will stay about the same
+        </label>
+      </fieldset>
+
+      <div class="button-row">
+        <button id="stepBtn" type="button">Advance one step</button>
+        <button id="pauseBtn" type="button" class="secondary-btn">Pause</button>
+        <button id="resetScenarioBtn" type="button" class="secondary-btn">
+          Reset scenario
+        </button>
+      </div>
+
+      <div id="predictionFeedback" class="feedback" aria-live="polite">
+        Choose a prediction before advancing.
+      </div>
+
+      <div class="model-board">
+        <h3>Current model values</h3>
+        <div id="populationIndicators" class="indicator-grid"></div>
+        <p class="model-note">
+          These are model values, not real measurements.
+        </p>
+      </div>
+
+      <div class="change-log">
+        <h3>What changed, and why?</h3>
+        <div id="changeLog" aria-live="polite">
+          No simulation step yet.
+        </div>
+      </div>
+    </section>
+
+    <section id="restore" class="activity panel hidden">
+      <div class="activity-heading">
+        <div>
+          <p class="step-label">Activity 3</p>
+          <h2>Restore balance</h2>
+        </div>
+        <span id="restoreStatus" class="status-badge">Not complete</span>
+      </div>
+
+      <p>
+        This unfamiliar meadow is struggling. Change its conditions
+        and see whether the model improves.
+      </p>
+
+      <div class="diagnosis-box">
+        <p><strong>Starting clues:</strong></p>
+        <ul>
+          <li>Sunlight is low.</li>
+          <li>Water is low.</li>
+          <li>Herbivores are high compared with plant food.</li>
+        </ul>
+      </div>
+
+      <div class="control-grid">
+        <label>
+          Water
+          <input id="restoreWater" type="range" min="0" max="100" value="30">
+          <span id="restoreWaterValue">30</span>
+        </label>
+
+        <label>
+          Sunlight
+          <input id="restoreSun" type="range" min="0" max="100" value="35">
+          <span id="restoreSunValue">35</span>
+        </label>
+      </div>
+
+      <div class="button-row">
+        <button id="restoreStepBtn" type="button">Test one step</button>
+        <button id="restoreHintBtn" type="button" class="secondary-btn">Hint</button>
+        <button id="restoreResetBtn" type="button" class="secondary-btn">
+          Reset challenge
+        </button>
+      </div>
+
+      <div id="restoreFeedback" class="feedback" aria-live="polite">
+        Adjust the conditions, then test your idea.
+      </div>
+
+      <div id="restoreIndicators" class="indicator-grid"></div>
+    </section>
+
+    <section class="panel summary">
+      <h2>Lesson progress</h2>
+
+      <ul class="progress-list">
+        <li id="progressBuild">○ Build a viable habitat</li>
+        <li id="progressPredict">○ Make and test a prediction</li>
+        <li id="progressRestore">○ Improve a struggling habitat</li>
+      </ul>
+
+      <div id="completionMessage" class="feedback">
+        Complete all three activities to finish the lesson.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Meadow Balance Lab is a simplified learning model.
+      Real ecosystems are much more complex.
+    </p>
+  </footer>
+
+  <script src="ecosystem-model.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
